@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuotesApp.Data;
 using QuotesApp.Models;
@@ -52,6 +53,7 @@ namespace QuotesApp.Controllers
         }
 
         // GET: Quotes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -60,6 +62,7 @@ namespace QuotesApp.Controllers
         // POST: Quotes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Statement,Author")] Quotes quotes)
@@ -74,6 +77,7 @@ namespace QuotesApp.Controllers
         }
 
         // GET: Quotes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -92,6 +96,7 @@ namespace QuotesApp.Controllers
         // POST: Quotes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Statement,Author")] Quotes quotes)
@@ -125,6 +130,7 @@ namespace QuotesApp.Controllers
         }
 
         // GET: Quotes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +149,7 @@ namespace QuotesApp.Controllers
         }
 
         // POST: Quotes/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

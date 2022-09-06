@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuotesApp.Data;
 using QuotesApp.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuotesApp.Controllers
 {
@@ -23,6 +20,17 @@ namespace QuotesApp.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Quotes.ToListAsync());
+        }
+
+        // GET: Searchresults
+        public async Task<IActionResult> SearchResults()
+        {
+            return View();
+        }
+        // POST: Searchresults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            return View("Index", await _context.Quotes.Where(j => j.Statement.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Quotes/Details/5
